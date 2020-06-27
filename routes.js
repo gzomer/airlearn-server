@@ -8,7 +8,7 @@ router.use(function(req, res, next) {
 	if (req.subdomains && req.subdomains.length) {
 		req.schoolDomain = req.subdomains[0]
 	} else {
-		res.redirect(301, 'www.airlearn.me')
+		res.redirect(301, 'https://www.airlearn.me')
 		return;
 	}
 	next()
