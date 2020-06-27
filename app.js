@@ -57,7 +57,7 @@ const DEFAULT_URL_AFTER_LOGIN = '/courses'
 app.use(function(req, res, next) {
   if (req.subdomains && req.subdomains.length) {
     req.schoolDomain = req.subdomains[0]
-  } else if (host.match(/^www\..*/i)) {
+  } else if (req.header("host").match(/^www\..*/i)) {
     next();
   }
   else {
