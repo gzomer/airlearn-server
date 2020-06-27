@@ -7,14 +7,8 @@ const publish = new Publish()
 router.use(function(req, res, next) {
 	if (req.subdomains && req.subdomains.length) {
 		req.schoolDomain = req.subdomains[0]
-	} else if (req.header("host").match(/^www\..*/i)) {
-		next();
 	}
-	else {
-		res.redirect(301, 'https://www.airlearn.me')
-		return;
-	}
-	next();
+	next()
 })
 
 router.get('/courses',
