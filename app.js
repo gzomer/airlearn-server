@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3030
 const swig = require('swig')
 const cors = require('cors')
 const passport = require('passport');
