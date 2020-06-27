@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <main role="main">
+
+      {% if breadcrumbs.length > 0 %}
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            {% if breadcrumb.url %}
+            <li class="breadcrumb-item"><a href="{{breadcrumb.url}}">{{breadcrumb.name}}</a></li>
+            {% else %}
+            <li class="breadcrumb-item active" aria-current="page">{{breadcrumb.name}}</li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </nav>
+      {% endif %}
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">{{page.title}}</h1>
+          <p class="lead text-muted">{{page.description}}</p>
+        </div>
+      </section>
+
+      <div class="pagelist py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+            {% for item in items %}
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <!--<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">-->
+                <div class="card-body">
+                  <h3>{{item.name}}</h3>
+                  <p class="card-text">{{item.description}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="{{item.url}}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+{% endblock %}

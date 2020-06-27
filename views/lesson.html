@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <main role="main">
+
+      {% if breadcrumbs.length > 0 %}
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            {% if breadcrumb.url %}
+            <li class="breadcrumb-item"><a href="{{breadcrumb.url}}">{{breadcrumb.name}}</a></li>
+            {% else %}
+            <li class="breadcrumb-item active" aria-current="page">{{breadcrumb.name}}</li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </nav>
+      {% endif %}
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">{{page.title}}</h1>
+          <p class="lead text-muted">{{page.description}}</p>
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+
+        <div class="container">
+          {% if lesson.VideoURL %}
+          <div class="row video-wrapper">
+            <div class="col">
+                <iframe width="560" height="315" src="{{lesson.VideoURL}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+          {% endif %}
+          {% if lesson.Attachments.length > 0 %}
+          <div class="attachments-wrapper">
+            <h3>Lesson materials</h3>
+            <div class="row">
+              {% for attachment in lesson.Attachments %}
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  {% if attachment.type.indexOf('image') != -1 %}
+                  <img class="card-img-top" src="{{attachment.url}}">
+                  {% endif %}
+                  <div class="card-body">
+                    <h4>{{attachment.filename}}</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="{{attachment.url}}" target="_blank" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="assignment-wrapper">
+            <h3>Submit your assignment</h3>
+            {% if !submittedAssignment %}
+            <form ref='uploadForm' action='{{uploadUrl}}' method='post' encType="multipart/form-data">
+                <input type="file" name="assignment" />
+                <input type='submit' class="btn btn-primary" value='Submit' />
+            </form>
+            {% else %}
+              <p>You have already subbmited your assignment</p>
+              <a href="{{submittedAssignment}}">View your submission</a>
+            {% endif %}
+        </div>
+      </div>
+
+    </main>
+
+{% endblock %}

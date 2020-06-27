@@ -1,0 +1,36 @@
+{% extends 'base-empty.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container login-container">
+  	<div class="row login-container">
+  		<div class="col-md-4 offset-md-4">
+  			<h1 class="header-home"><small>Welcome to</small> {{school.name}}</h1>
+  			<form action="/login" method="post">
+			  <div class="form-group">
+			    <label>Email address</label>
+			    <input type="email" class="form-control" name="username" >
+			  </div>
+			  <div class="form-group">
+			    <label>Password</label>
+			    <input type="password" name="password" class="form-control">
+			  </div>
+			  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			  {% if errors.message %}
+			    <div class="alert alert-primary" role="alert">
+				  {{ errors.name}}
+				</div>
+			  {% endif %}
+			  <div class="bottom-links">
+			  		<a href="/register">I don't have an account</a>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+  </div>
+
+{% endblock %}
