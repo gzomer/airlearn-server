@@ -21,7 +21,7 @@ const redisClient = redis.createClient({
 
 const LMS = require('./services/lms')
 
-mongoose.connect('mongodb://localhost:27019/lms', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/lms', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const expressSession = session({
   secret: 'YVYivrs8n4',
