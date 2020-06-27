@@ -7,6 +7,9 @@ const publish = new Publish()
 router.use(function(req, res, next) {
 	if (req.subdomains && req.subdomains.length) {
 		req.schoolDomain = req.subdomains[0]
+	} else {
+		res.redirect('www.airlearn.me')
+		return;
 	}
 	next()
 })
