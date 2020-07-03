@@ -15,8 +15,9 @@
 	margin-top: 5px;
 }
 .jumbotron {
-	background: #ffffff;
-	margin-bottom: 0px;
+	padding:100px 0px;
+	margin-top:0px;
+	margin-bottom: 0px
 }
 .jumbotron .container {
     max-width: 40rem;

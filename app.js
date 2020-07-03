@@ -160,10 +160,36 @@ function wrapAsync(fn) {
 
 app.use(routes)
 
-app.use(function(error, req, res, next) {
-  // Any request to this server will get here, and will send an HTTP
-  // response with the error message 'woops'
-  res.status(422).json({ message: error.message });
+router.use(async function(error, req, res, next) {
+  let school = null
+  try {
+    school = await new LMS(req.schoolDomain).init()
+  } catch (e) {
+    res.status(422).render('error', {
+      school: {
+        name:'AirLearn',
+        theme:'United'
+      },
+      page: {
+        title: "Ops, there was an error",
+        description: error.message
+      }
+    })
+    return
+  }
+
+
+  if (req.headers && req.headers.accept && req.headers.accept.indexOf('application/json') != -1) {
+    res.status(422).json({ message: error.message });
+  } else {
+    res.status(422).render('error', {
+      school: school.school,
+      page: {
+        title: "Ops, there was an error",
+        description: error.message
+      }
+    })
+  }
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`))
