@@ -160,7 +160,7 @@ function wrapAsync(fn) {
 
 app.use(routes)
 
-router.use(async function(error, req, res, next) {
+app.use(async function(error, req, res, next) {
   let school = null
   try {
     school = await new LMS(req.schoolDomain).init()
