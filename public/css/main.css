@@ -19,6 +19,11 @@
 	margin-top:0px;
 	margin-bottom: 0px
 }
+
+.breadcrumb {
+	margin-bottom: 0px;
+}
+
 .jumbotron .container {
     max-width: 40rem;
 }
