@@ -5,22 +5,42 @@ const crypto = require('crypto')
 class Publish {
 
 	async publish(data) {
-
 		let hasCreated = false
 		let school = null;
+
+		let existingDomain =  await DB.models.School.findOne({
+			domain: data.domain
+		})
 
 		if (typeof data.apiKey != 'undefined' && data.apiKey != null && data.apiKey != '') {
 			school = await DB.models.School.findOne({
 				apiKey: data.apiKey
 			})
 
+			if (existingDomain && existingDomain.id != school.id) {
+				return {
+					success: false,
+					message: 'This domain is already in use.'
+				}
+			}
+
 			if (school == null) {
-				throw new Error('Invalid school')
+				return {
+					success: false,
+					message: 'Invalid school'
+				}
 			}
 		} else {
+			if (existingDomain) {
+				return {
+					success: false,
+					message: 'This domain is already in use.'
+				}
+			}
 			hasCreated = true
 			school = await this.createEmptySchool()
 		}
+
 
 		school.name = data.name
 		school.description = data.description
