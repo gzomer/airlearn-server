@@ -121,7 +121,7 @@ class LMS {
 				'Lesson' : [lesson.ID],
 				'Attachments' : [
 					{
-            			"url": "https://dl.airtable.com/.attachments/76c53bae4374ce702a13f7a61c04f9b2/f8f3e226/Improving_L2_researchers_writingfluency.pdf"
+            			"url": assignmentURL
           			}
         		],
 			}

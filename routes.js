@@ -141,7 +141,7 @@ router.post('/upload/:course/:lesson', wrapAsync(async function(req, res) {
       return res.status(500).send(err);
     }
 
-    let publicURL = `https://airlearn.me/public/uploads/lessons/${fileName}`;
+    let publicURL = `https://www.airlearn.me/public/uploads/lessons/${fileName}`;
 
   	try {
   		await lms.sendAssignment(publicURL, student, lesson)
